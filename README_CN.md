@@ -173,12 +173,15 @@ pipeline = Pipeline(factory, ...)
 pipeline.add_attributes("face/heart_rate")
 ```
 
+完整的端到端可视化示例请参见：
+
+* [examples/camera_heart_rate.py](https://github.com/seetapsych/seetapsych-hertz/blob/main/examples/camera_heart_rate.py) — 摄像头实时 rPPG 心率估计，带滚动 BPM 读数。
+
 ## 模块库
 
 | 模块 | 说明 | 输入方式 |
 |---|---|---|
 | [AdaChrom](seetapsych_hertz/modules/ada-chrom.yml) | 基于自适应皮肤 ROI 的色度 rPPG 方法，脉搏估计不依赖学习模型 | 视频流 · 视频文件 |
-| [Seeta](seetapsych_hertz/modules.inactived/seeta.yml) | 基于额头色度与 FFT 的心率估计，配置目前未启用 | 视频流 · 视频文件 |
 | [TinyHR](seetapsych_hertz/modules/tiny-hr.yml) | 卷积式 rPPG 波形估计，结合基于 Welch PSD 的心率后处理 | 视频流 · 视频文件 |
 
 ### TinyHR 参数
@@ -188,16 +191,42 @@ pipeline.add_attributes("face/heart_rate")
 | `fps` | number | `30` | 用于波形缓冲与频谱分析的采样率，应与有效输入帧率一致 |
 | `interval` | number | `1` | 按时间戳触发的更新请求间隔，单位为秒；区别于观测时长与计算耗时 |
 
-### AdaChrom 参数
+### AdaChrom
 
-| 名称 | 类型 | 默认值 | 说明 |
+> 基于自适应皮肤 ROI 的色度分析实现无模型 rPPG 心率估计。
+
+模块配置：[ada-chrom.yml](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/ada-chrom.yml)
+
+| 包 | 提供 | 依赖 |
+|---|---|---|
+| HeartRate-AdaChrom | `face/heart_rate` | `face/dense_landmarks` |
+
+**说明**
+
+基于自适应额头 ROI 的色度 rPPG 心率估计器，无需神经网络模型。
+
+**使用说明**
+
+- 同时支持视频流与视频文件输入。
+- 视频流模式下，30 FPS 或更高帧率可获得最佳效果，需优化处理逻辑与更好的硬件（GPU）。
+- 为获得稳定的分析结果，推荐使用帧率稳定在 30 FPS 或以上的视频文件。
+
+**参数**
+
+| 名称 | 类型 | 默认值 | 说明与调优 |
 |---|---|---|---|
-| `window_samples` | integer | `300` | 分析窗口帧数，控制时序上下文及估计稳定性与响应速度之间的权衡 |
-| `roi_regions` | `selection[]` | `["skin_b_adaptive_forehead"]` | 在有效结果融合前分别进行估计的皮肤区域 |
+| `window_samples` | integer | `300` | 心率估计的滑动窗口帧数。数值越大噪声越低但延迟越高；需根据实时性需求调整。 |
+| `roi_regions` | `selection[]` | `["skin_b_adaptive_forehead"]` | 用于心率估计的区域列表。默认为 `["skin_b_adaptive_forehead"]`。多个选择器独立计算，有效结果融合至 `hr_bpm`，各区域独立结果保存在 `roi_hr_bpm` 映射中。 |
 
-表中模块均提供
-[`face/heart_rate`](https://github.com/seetapsych/seetapsych-attributes#faceheart_rate)
-属性。
+**模型**
+
+*(无)*
+
+**输出属性**
+
+- `face/heart_rate` — [规格说明](https://github.com/seetapsych/seetapsych-attributes#faceheart_rate)。
+
+通过 `roi_regions` 请求的各区域结果返回在 `roi_hr_bpm` 中：每个键对应一个选中的 ROI，值为该区域在当前窗口内的心率（BPM）。
 
 ## 项目资源
 
