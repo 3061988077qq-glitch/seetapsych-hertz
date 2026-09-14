@@ -114,3 +114,5 @@ __pycache__/
 # assets directory — whitelist all contents (supersedes per-type opt-in above)
 !/assets/
 !/assets/**
+
+.DS_Store
