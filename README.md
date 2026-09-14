@@ -29,19 +29,22 @@ from seetapsych_lib.runtime.factory import Factory
 from seetapsych_lib.runtime.pipeline import Pipeline
 
 factory = Factory()
-factory.load_file_modules("seetapsych_hertz/modules/seeta.yml")
+factory.load_file_modules("seetapsych_hertz/modules/ada-chrom.yml")
 
 pipeline = Pipeline(factory, ...)
 
 pipeline.add_attributes("face/heart_rate")
 ```
 
+For complete end-to-end examples with visualization, see:
+
+* [examples/camera_heart_rate.py](https://github.com/seetapsych/seetapsych-hertz/blob/main/examples/camera_heart_rate.py) — live-camera rPPG heart rate estimation with rolling BPM readout.
+
 ### Module Catalog
 
 | Module YAML Path | Package Name |
 |---|---|
 | `seetapsych_hertz/modules/ada-chrom.yml` | HeartRate-AdaChrom |
-| `seetapsych_hertz/modules/seeta.yml` | HeartRate-Seeta |
 | `seetapsych_hertz/modules/tiny-hr.yml` | HeartRate-TinyHR |
 
 ### AdaChrom
@@ -56,7 +59,7 @@ Module config: [ada-chrom.yml](https://github.com/seetapsych/seetapsych-hertz/bl
 
 **Description**
 
-Adaptive chrominance rPPG heart rate estimator. Accepts multiple ROI selectors; the default forehead-only adaptive skin mask (`skin_b_adaptive_forehead`) matches the original delivery configuration, while the preset group `all` runs every available region.
+Adaptive chrominance rPPG heart rate estimator from adaptive forehead ROI, no neural model required.
 
 **Usage Notes**
 
@@ -69,7 +72,7 @@ Adaptive chrominance rPPG heart rate estimator. Accepts multiple ROI selectors; 
 | Name | Type | Default | Description & Tuning |
 |---|---|---|---|
 | `window_samples` | integer | `300` | Sliding window frame count for HR estimation. Larger values reduce noise but increase latency; adjust based on real-time demand. |
-| `roi_regions` | `selection[]` | `["skin_b_adaptive_forehead"]` | ROI selectors to estimate heart rate on. Multiple selectors are evaluated independently, with valid results merged into the fused `hr_bpm` and the per-region `roi_hr_bpm` map. |
+| `roi_regions` | `selection[]` | `["skin_b_adaptive_forehead"]` | List of regions to use for HR estimation. Defaults to ["skin_b_adaptive_forehead"]. Multiple selectors are evaluated independently, with valid results merged into the fused `hr_bpm` and the per-region `roi_hr_bpm` map. |
 
 **Models**
 
@@ -92,7 +95,7 @@ Module config: [tiny-hr.yml](https://github.com/seetapsych/seetapsych-hertz/blob
 
 **Description**
 
-Fast RhythmFormer heart rate estimator using buffered face crops + Welch spectral analysis.
+Fast RhythmFormer heart rate estimator using buffered face crops plus Welch spectral analysis.
 
 **Usage Notes**
 
