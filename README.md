@@ -11,7 +11,7 @@ facial skin-color variations associated with pulsatile blood-volume changes in R
 
 [English](README.md) | [简体中文](README_CN.md)
 
-[Introduction](#introduction) · [Installation](#installation) · [Demo](#demo) · [Datasets](#training-data) · [Benchmark](#model-size-and-latency) · [Technical Report](website/public/downloads/tinyhr-technical-report.pdf)
+[Introduction](#introduction) · [Open-source estimators](#two-open-source-heart-rate-estimators) · [Installation](#installation) · [Demo](#demo) · [Datasets](#training-data) · [Benchmark](#model-size-and-inference-time) · [Resources](#resources)
 
 [![TinyHR demo showing facial video, predicted pulse waveform, and heart-rate estimates](website/public/media/tinyhr-demo.gif)](website/public/media/demo-full.mp4)
 
@@ -27,11 +27,11 @@ facial skin-color variations associated with pulsatile blood-volume changes in R
 ## Introduction
 
 SeetaPsych Hertz provides heart-rate estimation modules for the
-[SeetaPsych](https://github.com/seetapsych/seetapsych-lib) ecosystem. TinyHR is a lightweight
-convolutional model for remote photoplethysmography (rPPG). It encodes neighboring-frame
-differences and aggregates temporal features at multiple scales to predict one pulse-waveform
-sample per input frame. Heart rate is then estimated from the dominant frequency of the
-band-pass-filtered waveform using Welch power spectral density (PSD) estimation.
+[SeetaPsych](https://github.com/seetapsych/seetapsych-lib) ecosystem. It includes two
+open-source remote photoplethysmography (rPPG) estimators: **TinyHR**, a lightweight
+convolutional model that predicts a pulse waveform from facial video, and **AdaChrom**, an
+unsupervised signal-processing method based on adaptive skin-region selection, chrominance
+projection, and frequency analysis.
 
 The exported ONNX model contains **82,177 parameter elements** and occupies approximately
 **381 KiB**. The training subsets reported across four datasets sum to **1,288 subjects**
@@ -44,7 +44,7 @@ update interval of 1.0 s once sufficient valid face frames have been collected.
 |---|---|---|
 | 🌍 | **Multi-source training data** | Training subsets from four rPPG datasets total 1,288 subjects and 6,307 videos, spanning multiple recording conditions. |
 | 🪶 | **Compact convolutional model** | Approximately 82K exported parameters and a 381 KiB ONNX file reduce model-storage requirements for edge deployment. |
-| ⚡ | **Low computational latency** | A previous local CPU benchmark recorded a mean of 132 ms; the streaming module has a separate default update interval of 1.0 s. |
+| ⚡ | **Fast model inference** | A 100-run reference benchmark averaged 80 ms on an Intel Core i9-13900KF CPU and 6 ms on an NVIDIA H20 GPU. |
 | 📹 | **Contactless measurement** | A regular RGB camera provides the facial video input; no wearable sensor is required for the estimation pipeline. |
 | 📈 | **Waveform-based estimation** | TinyHR predicts an rPPG waveform, then estimates heart rate by signal processing; the predicted waveform remains available for analysis. |
 | 🧩 | **SeetaPsych integration** | Ready-made modules support video files and live video streams through the SeetaPsych pipeline. |
@@ -88,21 +88,21 @@ reported training-subset counts.
 
 Source: [TinyHR technical report](website/public/downloads/tinyhr-technical-report.pdf), page 1 (input) and pages 6-7 (training data and configuration).
 
-## Model Size and Latency
+## Model Size and Inference Time
 
 | Measurement | Result | Interpretation |
 |---|---:|---|
 | Exported ONNX parameters | **82,177** | Initializer-element count after export and convolution/normalization fusion; not the pre-export trainable-parameter count |
 | ONNX file size | **≈ 381 KiB** | 390,150 bytes; SHA-256 matches the checksum declared in `tiny-hr.yml` |
-| Reference processing latency | **132 ms (mean)** | Previous local measurement including input normalization, ONNX inference, waveform normalization, and heart-rate post-processing |
-| Reference latency distribution | **125 ms (median); 164 ms (P95)** | 50 timed runs after warm-up with ONNX Runtime CPUExecutionProvider |
+| CPU inference time | **80 ms mean** | 100 TinyHR inference runs on an Intel Core i9-13900KF CPU at 3.00 GHz |
+| GPU inference time | **6 ms mean** | 100 TinyHR inference runs on an NVIDIA H20 GPU in a server environment |
 | Input observation duration | **≈ 5.3 s at 30 FPS** | Time to collect 160 valid face frames; the first result also depends on update scheduling and computation |
 | Rolling update interval | **1.0 s default** | Timestamp-based update requests; approximately 30 frames per interval at 30 FPS |
 
-**Measurement scope.** The previous local benchmark used ONNX Runtime 1.30.0
-CPUExecutionProvider and 50 timed runs after warm-up, excluding video acquisition and
-face detection. These are implementation measurements, separate from the report's
-accuracy evaluation; latency depends on the runtime environment and processing-window length.
+**Measurement scope.** These team-provided reference values measure TinyHR model inference
+over 100 runs on each device. They exclude video acquisition, face detection, collection of
+the 160-frame input window, and update scheduling. Runtime configuration was not recorded;
+results are hardware- and environment-dependent and are separate from accuracy evaluation.
 
 The 160-frame input, computation time, and update interval describe different stages.
 The streaming implementation accumulates predicted waveform segments over up to 20 s
@@ -110,7 +110,9 @@ for heart-rate estimation, so a 1.0 s update interval does not imply a 1.0 s res
 physiological changes. The compact model and rolling estimates support prototyping in
 human-computer interaction, affective computing, and contactless monitoring research.
 
-## How TinyHR Works
+## Two Open-Source Heart-rate Estimators
+
+### TinyHR: lightweight learning-based rPPG
 
 [![TinyHR architecture and inference flow](website/public/media/tinyhr-flowchart.png)](website/public/downloads/tinyhr-flowchart.pdf)
 
@@ -141,6 +143,18 @@ and predicted spectral peaks. Their weights are 0.2, 1.0, and 1.0:
 ```text
 L = 0.2 L_time + L_CE + L_KL
 ```
+
+### AdaChrom: unsupervised chrominance-based rPPG
+
+AdaChrom is an unsupervised rPPG heart-rate estimator that requires no labeled training data.
+It finds reliable skin regions in facial RGB video, extracts subtle pulse-related color changes,
+recovers a blood-volume-pulse waveform through CHROM chrominance projection, and estimates
+heart rate from the dominant FFT frequency. This provides a lightweight and interpretable
+open-source alternative alongside TinyHR.
+
+![AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing](website/public/media/adachrom-pipeline.png)
+
+*AdaChrom pipeline, extracted from page 10 of the SeetaPsych v1.0 technical report.*
 
 ## Evaluation
 
