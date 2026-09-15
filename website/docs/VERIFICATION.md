@@ -1,5 +1,26 @@
 # Verification record
 
+## 2026-09-15 — AdaChrom method addition
+
+**Local preview:** `http://127.0.0.1:4325/`
+
+**Browser:** Headless Chromium, driven by Playwright
+
+**Scope:** Website content, layout, and extracted AdaChrom figure; no model accuracy or inference-speed benchmark was independently run during website QA.
+
+| Check | Actual result |
+| --- | --- |
+| Production build | `npm run build` passed and generated `/` and `/zh/`. |
+| Responsive layout | Final AdaChrom content was checked at observed 1028 px desktop and 403 px mobile widths; no horizontal overflow. Screenshots were visually reviewed. |
+| Method navigation | AdaChrom navigation reached `#adachrom` on both routes. |
+| AdaChrom content | One concise paragraph is present in both languages, followed by the pipeline figure. |
+| Figure asset | The 1170 × 460 PNG was cropped from Figure 3 on report page 10 and visually checked for complete labels and arrows. |
+| TinyHR benchmark copy | English and Chinese text identifies 100 runs per device, 80 ms mean on Intel Core i9-13900KF CPU at 3.00 GHz, and 6 ms mean on NVIDIA H20 GPU. Values are team-provided and were not independently rerun during website QA. |
+| Browser exceptions | No uncaught page errors were captured during these targeted checks. |
+| Source review | AdaChrom text and pipeline checked against report section 3.2 and rendered page 10. The full source report is not distributed with the website. |
+
+These checks cover the local static preview, not production deployment or testing on physical mobile devices.
+
 ## 2026-09-09 — English template adaptation
 
 **Local preview:** `http://127.0.0.1:4322/`  

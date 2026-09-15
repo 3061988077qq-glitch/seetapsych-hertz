@@ -715,7 +715,8 @@ h3 {
   letter-spacing: 0.08em;
 }
 
-.module-grid h3 {
+.module-grid h3,
+.module-grid h4 {
   font-size: 1.32rem;
 }
 
@@ -737,7 +738,8 @@ h3 {
   border-radius: var(--template-radius);
 }
 
-.inference-panel h3 {
+.inference-panel h3,
+.inference-panel h4 {
   margin-bottom: 0;
   color: var(--white);
 }
@@ -1129,3 +1131,10 @@ a.resource-row:hover {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Algorithm navigation within the shared method section. */
+.method-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1.5rem 0 2.5rem; font-weight: 650; color: var(--blue-deep); }
+.method-links a { text-decoration: underline; text-underline-offset: 0.3em; }
+.algorithm-title { scroll-margin-top: 6rem; font-size: clamp(1.65rem, 3vw, 2.3rem); }
+.module-grid h4, .inference-panel h4 { margin-top: 0; letter-spacing: -0.035em; line-height: 1.2; }
+.inference-panel h4 { font-size: 1.5rem; }

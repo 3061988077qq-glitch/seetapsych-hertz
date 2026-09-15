@@ -1,5 +1,6 @@
 ---
 import MethodFigure from './MethodFigure.astro';
+import AdaChrom from './AdaChrom.astro';
 import { site } from '../data/site';
 
 const modules = [
@@ -30,7 +31,10 @@ const modules = [
   <div class="container">
     <div class="section-heading method-heading">
       <p class="eyebrow eyebrow-dark">FROM VIDEO TO PULSE</p>
-      <h2 id="method-title">How TinyHR works</h2>
+      <h2 id="method-title">How heart-rate estimation works</h2>
+      <p>SeetaPsych offers two approaches: the learning-based TinyHR model and the unsupervised AdaChrom signal-processing method.</p>
+      <nav class="method-links" aria-label="Algorithm methods"><a href="#tinyhr">TinyHR ↓</a><a href="#adachrom">AdaChrom ↓</a></nav>
+      <h3 id="tinyhr" class="algorithm-title">TinyHR · Lightweight learning</h3>
       <p>Remote photoplethysmography (rPPG) estimates pulse-related signals from subtle changes in light reflected by facial skin. TinyHR processes a clip of {site.inputFrames} RGB facial frames at {site.inputSize} × {site.inputSize} pixels. Its lightweight convolutional pipeline emphasizes differences between neighboring frames, builds compact spatial features, and combines temporal information at multiple scales. The network predicts one rPPG waveform sample per video frame. Heart rate is then calculated from the predicted waveform using filtering and spectral analysis.</p>
       <p class="source-note"><a href={`${site.reportUrl}#page=1`} target="_blank" rel="noopener noreferrer" aria-label="Open the method description in the technical report in a new tab">Method description: TinyHR technical report, pages 1–6. <span aria-hidden="true">↗</span></a></p>
     </div>
@@ -44,7 +48,7 @@ const modules = [
       {modules.map((module) => (
         <li>
           <p class="module-number">{module.number}</p>
-          <h3>{module.title}</h3>
+          <h4>{module.title}</h4>
           <p>{module.copy}</p>
         </li>
       ))}
@@ -53,7 +57,7 @@ const modules = [
     <div class="inference-panel">
       <div>
         <p class="eyebrow eyebrow-dark">INFERENCE</p>
-        <h3>From waveform to heart rate</h3>
+        <h4>From waveform to heart rate</h4>
       </div>
       <div>
         <p>During inference, a second-order Butterworth band-pass filter retains frequencies from 0.75 to 2.5 Hz. Welch's method estimates the power spectral density of the filtered waveform. The dominant frequency is converted to beats per minute.</p>
@@ -68,5 +72,6 @@ const modules = [
       <p class="formula"><code>L = 0.2 L<sub>time</sub> + L<sub>CE</sub> + L<sub>KL</sub></code></p>
       <p class="source-note"><a href={`${site.reportUrl}#page=3`} target="_blank" rel="noopener noreferrer" aria-label="Open the training objectives in the technical report in a new tab">Training objectives: technical report, pages 3–6. <span aria-hidden="true">↗</span></a></p>
     </details>
+    <AdaChrom lang="en" />
   </div>
 </section>
