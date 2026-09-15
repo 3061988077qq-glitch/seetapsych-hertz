@@ -3,19 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "npm@11.19.0",
+  "engines": {
+    "node": ">=20.3.0",
+    "npm": ">=9.6.5"
+  },
   "scripts": {
-    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
-    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
-    "check": "ASTRO_TELEMETRY_DISABLED=1 astro build"
+    "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check"
   },
   "devDependencies": {
-    "astro": "5.0.0",
-    "typescript": "5.9.3"
+    "@astrojs/check": "^0.9.10",
+    "astro": "^5.0.0",
+    "cross-env": "^10.1.0",
+    "typescript": "^5.9.3"
   },
   "overrides": {
-    "@babel/types": "7.28.5",
-    "@babel/helper-string-parser": "7.27.1",
-    "@babel/helper-validator-identifier": "7.28.5"
+    "@babel/types": "^7.28.5",
+    "@babel/helper-string-parser": "^7.27.1",
+    "@babel/helper-validator-identifier": "^7.28.5"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true,
+    "esbuild@0.25.12": true,
+    "sharp@0.33.5": true
   }
 }
