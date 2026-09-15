@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { withBase } from '../utils/path';
 
 interface Props {
   lang?: 'en' | 'zh';
@@ -11,7 +12,7 @@ const zh = lang === 'zh';
 
 <header class="site-header">
   <nav class="container site-nav" aria-label={zh ? '主导航' : 'Primary navigation'}>
-    <a class="brand" href="#top"><img src="/media/tinyhr-mark.png" width="34" height="34" alt="" />{site.brand}</a>
+    <a class="brand" href="#top"><img src={withBase('/media/tinyhr-mark.png')} width="34" height="34" alt="" />{site.brand}</a>
     <div class="nav-links" aria-label={zh ? '页面章节' : 'Page sections'}>
       <a href="#highlights">{zh ? '亮点' : 'Highlights'}</a>
       <a href="#datasets">{zh ? '数据集' : 'Datasets'}</a>
@@ -19,7 +20,7 @@ const zh = lang === 'zh';
       <a href="#results">{zh ? '结果' : 'Results'}</a>
     </div>
     <div class="nav-actions">
-      <a class="language-link" href={zh ? '/' : '/zh/'}>{zh ? 'EN' : '中文'}</a>
+      <a class="language-link" href={zh ? withBase('/') : withBase('/zh/')}>{zh ? 'EN' : '中文'}</a>
       <a class="github-link" href={site.repoUrl} target="_blank" rel="noopener noreferrer" aria-label={zh ? '在新标签页打开 GitHub 仓库' : 'Open the GitHub repository in a new tab'}>
         GitHub <span aria-hidden="true">↗</span>
       </a>

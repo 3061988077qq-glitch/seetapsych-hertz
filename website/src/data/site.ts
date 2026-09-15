@@ -1,3 +1,5 @@
+import { withBase } from '../utils/path';
+
 export const site = {
   brand: 'SeetaPsych Hertz',
   model: 'TinyHR',
@@ -9,10 +11,10 @@ export const site = {
   reportPage: 7,
   inputFrames: 160,
   inputSize: 128,
-  reportUrl: '/downloads/tinyhr-technical-report.pdf',
-  flowchartPdfUrl: '/downloads/tinyhr-flowchart.pdf',
-  flowchartImageUrl: '/media/tinyhr-flowchart.png',
-  heroPreviewUrl: '/media/hero-preview.mp4',
-  demoUrl: '/media/demo-full.mp4',
-  posterUrl: '/media/demo-poster.jpg',
+  reportUrl: withBase('/downloads/tinyhr-technical-report.pdf'),
+  flowchartPdfUrl: withBase('/downloads/tinyhr-flowchart.pdf'),
+  flowchartImageUrl: withBase('/media/tinyhr-flowchart.png'),
+  heroPreviewUrl: withBase('/media/hero-preview.mp4'),
+  demoUrl: withBase('/media/demo-full.mp4'),
+  posterUrl: withBase('/media/demo-poster.jpg'),
 } as const;

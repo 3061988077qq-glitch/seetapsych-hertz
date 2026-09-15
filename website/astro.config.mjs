@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   output: 'static',
   site: 'https://seetapsych.github.io/seetapsych-hertz/',
-  base: '/',
+  base: '/seetapsych-hertz/',
   server: {
     host: true,
     port: 4321,
