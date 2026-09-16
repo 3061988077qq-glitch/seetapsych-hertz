@@ -1,4 +1,6 @@
 ---
+import { site } from '../data/site';
+
 interface Props { lang?: 'en' | 'zh'; }
 const { lang = 'en' } = Astro.props;
 const zh = lang === 'zh';
@@ -26,6 +28,13 @@ const stages = zh
         : 'AdaChrom is an unsupervised rPPG heart-rate estimator that requires no labeled training data. It locates reliable skin regions in facial RGB video, extracts subtle pulse-related color changes, recovers a blood-volume-pulse waveform through CHROM chrominance projection, and estimates heart rate from the dominant FFT frequency, providing a lightweight and interpretable open-source alternative to TinyHR.'}</p>
     </div>
   </header>
+
+  <figure class="adachrom-pipeline">
+    <div class="adachrom-pipeline-frame">
+      <img src={site.adachromPipelineUrl} alt={zh ? 'AdaChrom 预处理、BVP 提取和心率后处理流程' : 'AdaChrom preprocessing, BVP extraction, and heart-rate post-processing pipeline'} loading="lazy" width="1170" height="466" />
+    </div>
+    <figcaption>{zh ? 'AdaChrom 信号处理流程' : 'AdaChrom signal-processing pipeline'}</figcaption>
+  </figure>
 
   <div class="adachrom-stage-grid" aria-label={zh ? 'AdaChrom 处理流程' : 'AdaChrom processing stages'}>
     {stages.map((stage) => (
