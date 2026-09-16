@@ -11,7 +11,7 @@ AdaChrom 则通过无需训练的色度信号处理管线恢复脉搏信号。
 
 [English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
-[在线项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
+[HERTZ 项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
 
 [项目简介](#项目简介) · [算法集合](#hertz-心率估计算法集合) · [安装](#安装) · [演示](#演示) · [数据集](#训练数据) · [性能测试](#模型规模与推理时间) · [资源](#项目资源)
 
@@ -142,11 +142,9 @@ AdaChrom 是一种无需标注训练数据的无监督 rPPG 心率估计方法�
 定位可靠的皮肤区域，提取随脉搏变化的细微颜色信号，通过 CHROM 色度投影恢复血容量
 脉搏波形，最后利用 FFT 主频分析输出心率，为 TinyHR 之外提供一条轻量、可解释的开源方案。
 
-![AdaChrom 流程：预处理、BVP 提取和心率后处理](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/adachrom-pipeline.png)
+![AdaChrom 流程：预处理、BVP 提取和心率后处理](website/public/media/adachrom-pipeline.png)
 
-*AdaChrom 流程图，摘自 SeetaPsych v1.0 技术报告第 10 页。*
-
-> 技术报告第 3.2.3.1 节的完整英文原文、四种 ROI 策略、CHROM 公式与 FFT 后处理步骤已收录于 [English README](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md#adachrom-unsupervised-chrominance-based-rppg)。
+*AdaChrom 信号处理流程。*
 
 ## 实验结果
 
@@ -249,7 +247,7 @@ pipeline.add_attributes("face/heart_rate")
 - [完整演示视频](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 - [TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
 - [模型架构图](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
-- [在线项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
+- [HERTZ 项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
 - [交互式项目主页源码](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face 模型发布与交互式演示正在规划中。
 

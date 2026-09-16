@@ -12,7 +12,7 @@ an interpretable, training-free chrominance pipeline.
 
 [English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
-[Project Website](https://seetapsych.github.io/seetapsych-hertz/)
+[HERTZ Project Website](https://seetapsych.github.io/seetapsych-hertz/)
 
 [Introduction](#introduction) · [Estimator collection](#hertz-estimator-collection) · [Installation](#installation) · [Demo](#demo) · [Datasets](#training-data) · [Benchmark](#model-size-and-inference-time) · [Resources](#resources)
 
@@ -152,17 +152,17 @@ L = 0.2 L_time + L_CE + L_KL
 AdaChrom is an unsupervised remote photoplethysmography method for heart-rate estimation from
 facial videos. Instead of relying on labeled training data, AdaChrom estimates pulse-related
 blood volume pulse (BVP) signals from subtle temporal color variations in facial skin regions,
-providing an interpretable solution for contactless heart-rate estimation. Figure 3 illustrates
-the overall pipeline of AdaChrom. Given a facial video sequence, AdaChrom follows a three-stage
+providing an interpretable solution for contactless heart-rate estimation. Given a facial video
+sequence, AdaChrom follows a three-stage
 pipeline. In the pre-processing stage, face alignment is performed and ROI masks are generated.
 In the BVP extraction stage, mean BGR color signals are extracted from valid facial regions over
 a sliding temporal window, and the BVP signal is recovered from these temporal color signals. In
 the post-processing stage, heart rate is estimated from the recovered BVP signal through
 frequency-domain analysis and peak selection.
 
-![AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/adachrom-pipeline.png)
+![AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing](website/public/media/adachrom-pipeline.png)
 
-*Figure 3: Overview of the AdaChrom pipeline. The figure and the complete method text below are reproduced from Section 3.2.3.1 of the SeetaPsych v1.0 technical report.*
+*AdaChrom signal-processing pipeline.*
 
 #### A. Pre-processing
 
@@ -218,7 +218,7 @@ representation used for subsequent heart-rate estimation.
 ##### i) ROI Color Signal Extraction
 
 For every valid frame and ROI, the algorithm computes the spatial mean of the BGR pixel values
-inside the ROI mask [23]:
+inside the ROI mask:
 
 $$
 c_t = [\overline{B_t}, \overline{G_t}, \overline{R_t}]
@@ -235,7 +235,7 @@ effects.
 
 ##### ii) Pulse Signal Extraction
 
-The core BVP extraction model follows a CHROM-style chrominance projection [23]. The normalized
+The core BVP extraction model follows a CHROM-style chrominance projection. The normalized
 RGB traces are transformed into two chrominance components:
 
 $$
@@ -379,7 +379,7 @@ The per-region results requested via `roi_regions` are returned inside `roi_hr_b
 - [Full recorded demo](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 - [TinyHR technical report](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
 - [Architecture diagram](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
-- [Live project website](https://seetapsych.github.io/seetapsych-hertz/)
+- [HERTZ Project Website](https://seetapsych.github.io/seetapsych-hertz/)
 - [Interactive project page source](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face model distribution and interactive demos are planned.
 
