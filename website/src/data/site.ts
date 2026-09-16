@@ -16,7 +16,6 @@ export const site = {
   heroPreviewUrl: withBase('/media/hero-preview.mp4'),
   demoUrl: withBase('/media/demo-full.mp4'),
   posterUrl: withBase('/media/demo-poster.jpg'),
-  adachromPipelineUrl: withBase('/media/adachrom-pipeline.png'),
   southeastUniversityLogoUrl: withBase('/media/affiliations/southeast-university.png'),
   ictCasLogoUrl: withBase('/media/affiliations/ict-cas.png'),
 } as const;

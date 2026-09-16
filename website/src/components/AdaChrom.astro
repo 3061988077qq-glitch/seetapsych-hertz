@@ -1,9 +1,18 @@
 ---
-import { site } from '../data/site';
-
 interface Props { lang?: 'en' | 'zh'; }
 const { lang = 'en' } = Astro.props;
 const zh = lang === 'zh';
+const stages = zh
+  ? [
+      { label: '预处理', title: '自适应皮肤 ROI', copy: '人脸对齐后，算法将几何人脸区域与 YCrCb 肤色约束相交。AdaChrom-v4 进一步保留与面部区域一致的较大连通分量，减少孤立误检。' },
+      { label: 'BVP 提取', title: '时序色度轨迹', copy: '在滑动窗口内汇聚有效 ROI 的平均 BGR 颜色信号，再依据时间戳重采样、平滑并按通道时序均值归一化。' },
+      { label: '心率估计', title: 'CHROM 与 FFT', copy: 'CHROM 色度投影恢复血容量脉搏信号；加窗 FFT 在约 50–120 BPM 频带内选择主频，并换算为心率。' },
+    ]
+  : [
+      { label: 'PRE-PROCESSING', title: 'Adaptive skin ROI', copy: 'After face alignment, geometric facial regions are intersected with YCrCb skin constraints. AdaChrom-v4 further retains larger connected components consistent with the face region to reduce isolated false positives.' },
+      { label: 'BVP EXTRACTION', title: 'Temporal chrominance traces', copy: 'Mean BGR signals from valid ROIs are aggregated in a sliding window, then resampled from timestamps, smoothed, and normalized by each channel’s temporal mean.' },
+      { label: 'HEART-RATE ESTIMATION', title: 'CHROM and FFT', copy: 'CHROM chrominance projection recovers the blood-volume-pulse signal. A windowed FFT selects the dominant frequency within an approximately 50–120 BPM band and converts it to heart rate.' },
+    ];
 ---
 
 <article class="algorithm-card algorithm-card--adachrom" id="adachrom" aria-labelledby="adachrom-title">
@@ -18,8 +27,13 @@ const zh = lang === 'zh';
     </div>
   </header>
 
-  <figure>
-    <img src={site.adachromPipelineUrl} alt={zh ? 'AdaChrom 流程：预处理、BVP 提取和心率后处理' : 'AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing'} loading="lazy" width="1170" height="460" />
-    <figcaption>{zh ? 'AdaChrom 流程图，摘自 SeetaPsych v1.0 技术报告第 10 页。' : 'AdaChrom pipeline, extracted from page 10 of the SeetaPsych v1.0 technical report.'}</figcaption>
-  </figure>
+  <div class="adachrom-stage-grid" aria-label={zh ? 'AdaChrom 处理流程' : 'AdaChrom processing stages'}>
+    {stages.map((stage) => (
+      <section class="adachrom-stage">
+        <p>{stage.label}</p>
+        <h4>{stage.title}</h4>
+        <span>{stage.copy}</span>
+      </section>
+    ))}
+  </div>
 </article>

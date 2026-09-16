@@ -1317,30 +1317,49 @@ a.resource-row:hover {
   color: #34435a;
 }
 
-.algorithm-card .architecture-image-link,
-.algorithm-card--adachrom figure img {
+.algorithm-card .architecture-image-link {
   background: rgb(255 255 255 / 92%);
   border-color: rgb(15 23 42 / 12%);
 }
 
-.algorithm-card--adachrom figure {
-  margin: 0;
-}
-
-.algorithm-card--adachrom figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-style: solid;
-  border-width: 1px;
+.adachrom-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgb(15 159 117 / 24%);
   border-radius: calc(var(--template-radius) * 0.75);
-  box-shadow: 0 12px 36px rgb(15 23 42 / 7%);
+  background: rgb(15 159 117 / 24%);
+  box-shadow: 0 12px 36px rgb(15 23 42 / 5%);
 }
 
-.algorithm-card--adachrom figcaption {
-  margin-top: 0.8rem;
-  color: var(--muted);
-  font-size: 0.82rem;
+.adachrom-stage {
+  min-width: 0;
+  padding: 1.35rem;
+  background: rgb(255 255 255 / 76%);
+}
+
+.adachrom-stage > p {
+  margin: 0 0 0.5rem;
+  color: #087556;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.adachrom-stage h4 {
+  margin: 0 0 0.7rem;
+  color: var(--ink);
+  font-size: 1.05rem;
+  letter-spacing: -0.025em;
+}
+
+.adachrom-stage span {
+  display: block;
+  color: #405266;
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
 .algorithm-card .module-intro {
@@ -1364,6 +1383,10 @@ a.resource-row:hover {
 
 @media (max-width: 767px) {
   .method-links {
+    grid-template-columns: 1fr;
+  }
+
+  .adachrom-stage-grid {
     grid-template-columns: 1fr;
   }
 
