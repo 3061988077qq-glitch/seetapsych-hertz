@@ -11,6 +11,8 @@ AdaChrom 则通过无需训练的色度信号处理管线恢复脉搏信号。
 
 [English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
+[在线项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
+
 [项目简介](#项目简介) · [算法集合](#hertz-心率估计算法集合) · [安装](#安装) · [演示](#演示) · [数据集](#训练数据) · [性能测试](#模型规模与推理时间) · [资源](#项目资源)
 
 [![TinyHR 演示：人脸视频、预测脉搏波形和心率估计](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-demo.gif)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
@@ -247,6 +249,7 @@ pipeline.add_attributes("face/heart_rate")
 - [完整演示视频](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 - [TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
 - [模型架构图](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
+- [在线项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
 - [交互式项目主页源码](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face 模型发布与交互式演示正在规划中。
 

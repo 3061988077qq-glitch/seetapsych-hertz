@@ -12,6 +12,8 @@ an interpretable, training-free chrominance pipeline.
 
 [English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
+[Project Website](https://seetapsych.github.io/seetapsych-hertz/)
+
 [Introduction](#introduction) · [Estimator collection](#hertz-estimator-collection) · [Installation](#installation) · [Demo](#demo) · [Datasets](#training-data) · [Benchmark](#model-size-and-inference-time) · [Resources](#resources)
 
 [![TinyHR demo showing facial video, predicted pulse waveform, and heart-rate estimates](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-demo.gif)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
@@ -377,6 +379,7 @@ The per-region results requested via `roi_regions` are returned inside `roi_hr_b
 - [Full recorded demo](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 - [TinyHR technical report](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
 - [Architecture diagram](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
+- [Live project website](https://seetapsych.github.io/seetapsych-hertz/)
 - [Interactive project page source](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face model distribution and interactive demos are planned.
 
