@@ -1263,8 +1263,7 @@ a.resource-row:hover {
   color: #087556;
 }
 
-.algorithm-card h3,
-.algorithm-placeholder h3 {
+.algorithm-card h3 {
   margin: 0 0 0.9rem;
   font-size: clamp(2rem, 4vw, 3.15rem);
   letter-spacing: -0.05em;
@@ -1310,44 +1309,6 @@ a.resource-row:hover {
   border-top-color: rgb(15 23 42 / 14%);
 }
 
-.algorithm-placeholder {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1.25rem;
-  align-items: center;
-  min-height: 14rem;
-  padding: clamp(1.35rem, 4vw, 2.5rem);
-  color: var(--muted);
-  background:
-    linear-gradient(135deg, rgb(255 255 255 / 82%), rgb(247 249 252 / 82%)),
-    repeating-linear-gradient(-45deg, transparent 0 14px, rgb(37 99 216 / 4%) 14px 28px);
-  border: 1px dashed #afbdd0;
-  border-radius: calc(var(--template-radius) * 1.15);
-}
-
-.placeholder-mark {
-  display: grid;
-  width: 4.5rem;
-  height: 4.5rem;
-  place-items: center;
-  color: #8a9bb2;
-  border: 1px dashed #9fb0c6;
-  border-radius: 50%;
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  font-weight: 300;
-}
-
-.algorithm-placeholder h3 {
-  color: #52647b;
-  font-size: clamp(1.55rem, 3vw, 2.2rem);
-}
-
-.algorithm-placeholder p:last-child {
-  max-width: 720px;
-  margin-bottom: 0;
-}
-
 .module-grid h4,
 .inference-panel h4 {
   margin-top: 0;
@@ -1364,8 +1325,7 @@ a.resource-row:hover {
     grid-template-columns: 1fr;
   }
 
-  .algorithm-card-header,
-  .algorithm-placeholder {
+  .algorithm-card-header {
     grid-template-columns: 1fr;
   }
 
@@ -1374,8 +1334,4 @@ a.resource-row:hover {
     height: 2.7rem;
   }
 
-  .placeholder-mark {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
 }
