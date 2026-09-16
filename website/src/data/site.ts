@@ -17,4 +17,6 @@ export const site = {
   demoUrl: withBase('/media/demo-full.mp4'),
   posterUrl: withBase('/media/demo-poster.jpg'),
   adachromPipelineUrl: withBase('/media/adachrom-pipeline.png'),
+  southeastUniversityLogoUrl: withBase('/media/affiliations/southeast-university.png'),
+  ictCasLogoUrl: withBase('/media/affiliations/ict-cas.png'),
 } as const;

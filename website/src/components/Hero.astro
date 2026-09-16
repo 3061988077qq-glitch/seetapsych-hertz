@@ -13,8 +13,8 @@ const zh = lang === 'zh';
   <div class="container hero-inner">
     <div class="hero-copy">
       <p class="eyebrow">HERTZ / OPEN-SOURCE RPPG</p>
-      <h1 id="hero-title">{zh ? '开源人脸视频心率估计' : 'Open rPPG Heart-Rate Estimation'}</h1>
-      <p class="hero-description">{zh ? 'HERTZ 汇聚多种开源心率估计算法：从 TinyHR 轻量学习模型到 AdaChrom 无监督信号处理方法。' : 'HERTZ brings multiple open-source heart-rate estimators together, from the lightweight TinyHR model to the training-free AdaChrom signal-processing method.'}</p>
+      <h1 id="hero-title">{zh ? '面向人脸视频的 rPPG 心率估计技术' : 'rPPG Heart-Rate Estimation from Facial Video'}</h1>
+      <p class="hero-description">{zh ? 'HERTZ 是一个可扩展的开源算法集合，组织互补的人脸视频 rPPG 心率估计方法：TinyHR 从视频学习脉搏波形，AdaChrom 通过无需训练的色度信号处理恢复脉搏信号。' : 'HERTZ is an extensible open-source collection of complementary facial-video rPPG estimators: TinyHR learns pulse waveforms from video, while AdaChrom recovers pulse signals through training-free chrominance-based processing.'}</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#demo">{zh ? '观看演示' : 'Watch demo'}</a>
         <a class="button button-secondary" href={site.repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Open the code on GitHub in a new tab">

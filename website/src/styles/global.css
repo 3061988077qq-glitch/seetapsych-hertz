@@ -937,6 +937,39 @@ a.resource-row:hover {
   font-size: 0.72rem;
 }
 
+.footer-affiliations {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  width: fit-content;
+  margin-top: 1.35rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.65rem;
+  background: rgb(255 255 255 / 96%);
+}
+
+.footer-affiliations a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.3rem;
+}
+
+.footer-affiliations a:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+.footer-affiliations img {
+  display: block;
+  max-height: 3.15rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-affiliations a:first-child img {
+  max-height: 3.85rem;
+}
+
 .template-credit a {
   color: var(--white);
   text-decoration: underline;
@@ -1072,6 +1105,14 @@ a.resource-row:hover {
   .footer-inner {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .footer-affiliations {
+    max-width: 100%;
+  }
+
+  .footer-affiliations img {
+    max-width: min(55vw, 18rem);
   }
 
   .architecture-image-link {
