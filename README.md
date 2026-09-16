@@ -36,6 +36,9 @@ convolutional model that predicts a pulse waveform from facial video, and **AdaC
 unsupervised signal-processing method based on adaptive skin-region selection, chrominance
 projection, and frequency analysis.
 
+Designed as a modular research collection, HERTZ can incorporate additional rPPG estimators
+as independently documented and comparable method modules.
+
 The exported ONNX model contains **82,177 parameter elements** and occupies approximately
 **381 KiB**. The training subsets reported across four datasets sum to **1,288 subjects**
 and **6,307 videos**. The streaming module uses a 160-frame input window and a default
