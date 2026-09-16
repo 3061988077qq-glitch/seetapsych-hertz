@@ -12,9 +12,9 @@ const zh = lang === 'zh';
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="container hero-inner">
     <div class="hero-copy">
-      <p class="eyebrow">SEETAPSYCH HERTZ / TINYHR</p>
+      <p class="eyebrow">HERTZ / OPEN RPPG TOOLKIT</p>
       <h1 id="hero-title">{zh ? <>看见脉搏，<br />始于视频。</> : <>See the pulse.<br />Through video.</>}</h1>
-      <p class="hero-description">{zh ? '一个从普通人脸视频中恢复脉搏波形并估计心率的轻量级模型。' : 'A lightweight model that recovers pulse waveforms and estimates heart rate from facial video.'}</p>
+      <p class="hero-description">{zh ? 'HERTZ 汇聚多种开源心率估计算法：从 TinyHR 轻量学习模型到 AdaChrom 无监督信号处理方法。' : 'HERTZ brings multiple open-source heart-rate estimators together, from the lightweight TinyHR model to the training-free AdaChrom signal-processing method.'}</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#demo">{zh ? '观看演示' : 'Watch demo'}</a>
         <a class="button button-secondary" href={site.repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Open the code on GitHub in a new tab">
@@ -25,7 +25,7 @@ const zh = lang === 'zh';
     </div>
 
     <div class="hero-stage">
-      <p class="stage-label">{zh ? '录制演示 · 12 秒预览' : 'RECORDED DEMO · 12-SECOND PREVIEW'}</p>
+      <p class="stage-label">{zh ? 'TINYHR 录制演示 · 12 秒预览' : 'TINYHR RECORDED DEMO · 12-SECOND PREVIEW'}</p>
       <video
         class="media-video hero-video"
         data-hero-video

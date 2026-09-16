@@ -1,29 +1,25 @@
 ---
+import { site } from '../data/site';
+
 interface Props { lang?: 'en' | 'zh'; }
 const { lang = 'en' } = Astro.props;
 const zh = lang === 'zh';
 ---
 
-<section class="adachrom-panel" id="adachrom" aria-labelledby="adachrom-title">
-  <div class="adachrom-copy">
-    <p class="eyebrow eyebrow-dark">{zh ? '开源信号处理方法' : 'OPEN-SOURCE SIGNAL-PROCESSING METHOD'}</p>
-    <h3 id="adachrom-title">AdaChrom</h3>
-    <p>{zh
-      ? 'AdaChrom 是一种无需标注训练数据的无监督 rPPG 心率估计方法。它从人脸 RGB 视频中定位可靠的皮肤区域，提取随脉搏变化的细微颜色信号，通过 CHROM 色度投影恢复血容量脉搏波形，最后利用 FFT 主频分析输出心率，为 TinyHR 之外提供一条轻量、可解释的开源方案。'
-      : 'AdaChrom is an unsupervised rPPG heart-rate estimator that requires no labeled training data. It locates reliable skin regions in facial RGB video, extracts subtle pulse-related color changes, recovers a blood-volume-pulse waveform through CHROM chrominance projection, and estimates heart rate from the dominant FFT frequency, providing a lightweight and interpretable open-source alternative to TinyHR.'}</p>
-  </div>
+<article class="algorithm-card algorithm-card--adachrom" id="adachrom" aria-labelledby="adachrom-title">
+  <header class="algorithm-card-header">
+    <div class="algorithm-index" aria-hidden="true">02</div>
+    <div>
+      <p class="algorithm-kicker">{zh ? '无监督 · 信号处理' : 'UNSUPERVISED · SIGNAL PROCESSING'}</p>
+      <h3 id="adachrom-title">AdaChrom</h3>
+      <p>{zh
+        ? 'AdaChrom 是一种无需标注训练数据的无监督 rPPG 心率估计方法。它从人脸 RGB 视频中定位可靠的皮肤区域，提取随脉搏变化的细微颜色信号，通过 CHROM 色度投影恢复血容量脉搏波形，最后利用 FFT 主频分析输出心率，为 TinyHR 之外提供一条轻量、可解释的开源方案。'
+        : 'AdaChrom is an unsupervised rPPG heart-rate estimator that requires no labeled training data. It locates reliable skin regions in facial RGB video, extracts subtle pulse-related color changes, recovers a blood-volume-pulse waveform through CHROM chrominance projection, and estimates heart rate from the dominant FFT frequency, providing a lightweight and interpretable open-source alternative to TinyHR.'}</p>
+    </div>
+  </header>
 
   <figure>
-    <img src="/media/adachrom-pipeline.png" alt={zh ? 'AdaChrom 流程：预处理、BVP 提取和心率后处理' : 'AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing'} loading="lazy" width="1170" height="460" />
+    <img src={site.adachromPipelineUrl} alt={zh ? 'AdaChrom 流程：预处理、BVP 提取和心率后处理' : 'AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing'} loading="lazy" width="1170" height="460" />
     <figcaption>{zh ? 'AdaChrom 流程图，摘自 SeetaPsych v1.0 技术报告第 10 页。' : 'AdaChrom pipeline, extracted from page 10 of the SeetaPsych v1.0 technical report.'}</figcaption>
   </figure>
-</section>
-
-<style>
-  .adachrom-panel { margin-top: 4rem; padding: clamp(1.25rem, 3.5vw, 3rem); background: #edf4ff; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: var(--template-radius); scroll-margin-top: 6rem; }
-  .adachrom-copy { max-width: 900px; }
-  h3 { margin-bottom: 1rem; font-size: clamp(1.9rem, 3vw, 2.7rem); }
-  figure { margin: 2rem 0 0; }
-  img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: calc(var(--template-radius) * 0.65); background: #fff; }
-  figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.82rem; }
-</style>
+</article>

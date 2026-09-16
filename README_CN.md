@@ -1,17 +1,17 @@
 <div align="center">
 
-# SeetaPsych Hertz
+# HERTZ
 
-<img src="website/public/media/tinyhr-logo.png" width="460" alt="SeetaPsych Hertz 标志">
+<img src="website/public/media/tinyhr-logo.png" width="460" alt="HERTZ 标志">
 
-### 从细微肤色变化中感知脉搏
+### 面向人脸视频的开源心率估计算法集合
 
-TinyHR 利用 RGB 视频中与血容量脉动相关的面部皮肤微弱颜色变化恢复脉搏波形，
-实现非接触式心率估计。
+HERTZ 将多种互补的心率估计方法组织为可扩展的开源算法集合。TinyHR 从人脸视频学习脉搏波形，
+AdaChrom 则通过无需训练的色度信号处理管线恢复脉搏信号。
 
 [English](README.md) | [简体中文](README_CN.md)
 
-[项目简介](#项目简介) · [开源方案](#两种开源心率估计方案) · [安装](#安装) · [演示](#演示) · [数据集](#训练数据) · [性能测试](#模型规模与推理时间) · [资源](#项目资源)
+[项目简介](#项目简介) · [算法集合](#hertz-心率估计算法集合) · [安装](#安装) · [演示](#演示) · [数据集](#训练数据) · [性能测试](#模型规模与推理时间) · [资源](#项目资源)
 
 [![TinyHR 演示：人脸视频、预测脉搏波形和心率估计](website/public/media/tinyhr-demo.gif)](website/public/media/demo-full.mp4)
 
@@ -26,7 +26,7 @@ TinyHR 利用 RGB 视频中与血容量脉动相关的面部皮肤微弱颜色�
 
 ## 项目简介
 
-SeetaPsych Hertz 为
+HERTZ 为
 [SeetaPsych](https://github.com/seetapsych/seetapsych-lib) 生态提供心率估计模块。
 项目包含两种开源的远程光电容积描记（rPPG）心率估计方案：**TinyHR** 是从人脸视频预测
 脉搏波形的轻量级卷积模型；**AdaChrom** 是基于自适应皮肤区域筛选、色度投影与
@@ -102,7 +102,7 @@ VIPL-HR V1 测试集包含 **22 名受试者和 485 段视频**，报告说明�
 用于心率估计，因此 1.0 秒更新间隔不等同于对生理变化的 1.0 秒响应。
 紧凑模型与滚动估计适用于人机交互、情感计算和非接触式监测研究的原型开发。
 
-## 两种开源心率估计方案
+## HERTZ 心率估计算法集合
 
 ### TinyHR：轻量学习型 rPPG
 
@@ -143,6 +143,8 @@ AdaChrom 是一种无需标注训练数据的无监督 rPPG 心率估计方法�
 ![AdaChrom 流程：预处理、BVP 提取和心率后处理](website/public/media/adachrom-pipeline.png)
 
 *AdaChrom 流程图，摘自 SeetaPsych v1.0 技术报告第 10 页。*
+
+> 技术报告第 3.2.3.1 节的完整英文原文、四种 ROI 策略、CHROM 公式与 FFT 后处理步骤已收录于 [English README](README.md#adachrom-unsupervised-chrominance-based-rppg)。
 
 ## 实验结果
 

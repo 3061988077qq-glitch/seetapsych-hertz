@@ -1,6 +1,12 @@
-# SeetaPsych Hertz — Research Project Page
+# HERTZ — Research Project Page
 
-A static research showcase for two open-source heart-rate estimators, TinyHR and AdaChrom, using facial video and remote photoplethysmography (rPPG).
+A static research showcase for an extensible collection of open-source heart-rate estimators using facial video and remote photoplethysmography (rPPG).
+
+## HERTZ collection layout
+
+The public interface uses **HERTZ** as the shared product name. TinyHR and AdaChrom appear as independent method cards with distinct light tints, numbered navigation, and a reserved extension card for future estimators. Public assets are resolved through `withBase()` so local development, repository subpath deployment, and GitHub Pages use the same component code.
+
+This section and the current source code supersede the initial TinyHR-only blueprint retained below for design provenance. The maintained interface is bilingual, uses HERTZ as the collection identity, and treats each estimator as an independent expandable module.
 
 **Revision: 2026-09-09 · English template redesign implemented locally.** The current site is the English Astro adaptation: it uses the selected template's research-page composition, real recorded video, report-backed method text, and the supplied architecture diagram. Current build and browser evidence is recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md).
 

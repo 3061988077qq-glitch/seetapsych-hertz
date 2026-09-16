@@ -1,5 +1,21 @@
 # Verification record
 
+## 2026-09-16 - HERTZ collection layout and base-path repair
+
+**Scope:** Shared HERTZ identity, independent TinyHR/AdaChrom method cards, future-estimator placeholder, and repository-subpath asset handling.
+
+| Check | Actual result |
+| --- | --- |
+| Astro diagnostics | `npm run check` completed with 0 errors, 0 warnings, and 0 hints. |
+| Production build | `npm run build` passed and generated `/` and `/zh/`. |
+| Base-path output | Both generated pages reference `/seetapsych-hertz/media/adachrom-pipeline.png`; no authored `src="/..."`, `href="/..."`, `poster="/..."`, or `data-src="/..."` remains in `website/src`. |
+| Desktop layout | English method navigation, light-blue TinyHR card, light-green AdaChrom card, pipeline figure, and extension placeholder were visually inspected. |
+| Mobile layout | English and Chinese method sections were checked at a 390 x 844 viewport; cards stack without horizontal overflow. |
+| Browser console | No warnings or errors were recorded during the targeted preview checks. |
+| Report transcription | Root `README.md` contains the complete Section 3.2.3.1 text from report pages 9-11, including four ROI strategies, BVP extraction equations, and FFT post-processing. |
+
+The full SeetaPsych report remains a local reference and is not distributed with the repository.
+
 ## 2026-09-15 — AdaChrom method addition
 
 **Local preview:** `http://127.0.0.1:4325/`
