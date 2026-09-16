@@ -9,7 +9,7 @@
 HERTZ 将多种互补的心率估计方法组织为可扩展的开源算法集合。TinyHR 从人脸视频学习脉搏波形，
 AdaChrom 则通过无需训练的色度信号处理管线恢复脉搏信号。
 
-[English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
+[English](README.md) | [简体中文](README_CN.md)
 
 [HERTZ 项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
 

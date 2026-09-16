@@ -10,7 +10,7 @@ HERTZ brings complementary heart-rate estimators into one extensible open-source
 TinyHR learns pulse waveforms from facial video, while AdaChrom recovers pulse signals through
 an interpretable, training-free chrominance pipeline.
 
-[English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
+[English](README.md) | [简体中文](README_CN.md)
 
 [HERTZ Project Website](https://seetapsych.github.io/seetapsych-hertz/)
 
