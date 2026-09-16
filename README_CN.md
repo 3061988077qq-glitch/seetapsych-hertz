@@ -34,9 +34,116 @@ HERTZ 为
 ### TinyHR：轻量学习型 rPPG
 
 TinyHR 是从人脸视频预测 rPPG 波形、再通过频谱后处理估计心率的轻量学习型方法。
-训练数据、模型架构、参考推理时间、评估方案与调用示例详见
-[TinyHR 英文文档](seetapsych_hertz/tinyhr/README.md) 和
-[TinyHR 中文文档](seetapsych_hertz/tinyhr/README_CN.md)。
+
+#### 方法概述
+
+导出的 ONNX 模型包含 **82,177 个参数元素**，文件大小约为 **381 KiB**。TinyHR 使用 160 帧人脸视频作为输入窗口；在收集足够的有效人脸帧后，默认以 1.0 秒间隔滚动更新。
+
+#### 演示
+
+[![TinyHR 演示：人脸视频、预测脉搏波形和心率估计](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-demo.gif)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
+
+演示画面同时呈现检测到的人脸、预测的 rPPG 波形和心率估计。
+
+#### 训练数据
+
+TinyHR 使用四个 rPPG 数据集的子集训练。下表依据技术报告列出实际使用的训练数据，不代表原始数据集的完整规模。
+
+| 数据集 | 训练受试者 | 训练视频 | 用途 |
+|---|---:|---:|---|
+| VIPL-HR V1 | 85 | 1,883 | 训练 |
+| VIPL-HR V2 | 500 | 2,498 | 训练 |
+| V4V | 103 | 726 | 训练 |
+| MCD-rPPG | 600 | 1,200 | 训练；仅使用正脸视频 |
+| **合计** | **1,288** | **6,307** | **四来源训练数据** |
+
+| 训练配置 | 设置 |
+|---|---|
+| 批大小 | 4 |
+| 初始学习率 | 0.005 |
+| 学习率调度器 | OneCycleLR |
+| 输入视频片段 | 160 帧 RGB 人脸裁剪图像，每帧缩放至 128 × 128 像素 |
+
+来源：[TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)，第 1 页（模型输入）与第 6–7 页（训练数据和配置）。
+
+#### 模型规模与参考推理时间
+
+| 测试项 | 结果 | 说明 |
+|---|---:|---|
+| 导出 ONNX 参数量 | **82,177** | 导出及卷积与归一化融合后的初始化张量元素数，不等同于导出前的可学习参数量。 |
+| ONNX 文件大小 | **约 381 KiB** | 390,150 字节；SHA-256 与 tiny-hr.yml 声明的校验值一致。 |
+| CPU 推理时间 | **平均 80 ms** | Intel Core i9-13900KF（3.00 GHz）上进行 100 次推理。 |
+| GPU 推理时间 | **平均 6 ms** | 服务器 NVIDIA H20 GPU 上进行 100 次推理。 |
+| 输入观测时长 | **30 FPS 时约 5.3 秒** | 收集 160 帧有效人脸图像所需时间；首个结果还受更新调度与计算耗时影响。 |
+| 滚动更新间隔 | **默认 1.0 秒** | 按时间戳请求更新；30 FPS 时每个间隔约含 30 帧。 |
+
+参考测量不包括视频采集、人脸检测、输入窗口收集和更新调度；结果会随硬件与运行环境变化，且不等同于模型精度评估。
+
+#### 模型架构与推理
+
+[![TinyHR 架构和推理流程](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-flowchart.png)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
+
+| 阶段 | 模块 | 功能 |
+|---:|---|---|
+| 01 | 帧差融合 Stem | 将四组相邻帧 RGB 差分拼接为 12 通道，仅通过差分分支提取特征。 |
+| 02 | 空间 Patch Embedding | 逐帧采用核大小与步幅均为 4 的二维卷积，以非重叠分块将 32 × 32 特征映射为 32 通道的 8 × 8 网格。 |
+| 03 | 多尺度时序特征块 | 并行时间移位分支、逐点卷积、时序前馈网络和残差连接共同融合时间特征。 |
+| 04 | 波形预测头 | 空间池化和两层逐点卷积为每帧生成一个 rPPG 采样值。 |
+| 05 | 信号处理 | 去趋势、带通滤波和 Welch PSD 主峰共同得到心率估计。 |
+
+推理阶段采用截止频率为 0.75 和 2.5 Hz 的 Butterworth 带通滤波器（对应 45–150 BPM），并在该频带内取 Welch PSD 最大峰值对应的频率计算心率：
+
+~~~text
+心率（BPM）= 60 × 主频（Hz）
+~~~
+
+#### 训练目标
+
+技术报告定义了三项训练目标：负 Pearson 相关系数约束时域波形一致性；交叉熵对 45–149 BPM 范围内的离散心率类别进行分类；KL 散度约束参考与预测频谱主峰的分布。三项权重依次为 0.2、1.0 和 1.0：
+
+~~~text
+L = 0.2 L_time + L_CE + L_KL
+~~~
+
+#### 实验结果
+
+VIPL-HR 数据集第五折上的结果如下：
+
+| 标签 | MAE ↓ | RMSE ↓ | Pearson ↑ |
+|---|---:|---:|---:|
+| gt | **5.223** | **8.675** | **0.679** |
+| wave | **3.880** | **6.893** | **0.772** |
+
+#### 模块配置与使用
+
+模块配置：[tiny-hr.yml](seetapsych_hertz/modules/tiny-hr.yml)
+
+| 名称 | 类型 | 默认值 | 说明 |
+|---|---|---:|---|
+| fps | number | 30 | 用于波形缓冲与频谱分析的采样率，应与有效输入帧率一致。 |
+| interval | number | 1 | 按时间戳触发的更新请求间隔，单位为秒；区别于观测时长与计算耗时。 |
+
+~~~bash
+seetapsych-webui --files seetapsych_hertz/modules/tiny-hr.yml
+~~~
+
+~~~python
+from seetapsych_lib.runtime.factory import Factory
+from seetapsych_lib.runtime.pipeline import Pipeline
+
+factory = Factory()
+factory.load_file_modules("seetapsych_hertz/modules/tiny-hr.yml")
+pipeline = Pipeline(factory, ...)
+pipeline.add_attributes("face/heart_rate")
+~~~
+
+完整的端到端可视化示例请参见 [examples/camera_heart_rate.py](https://github.com/seetapsych/seetapsych-hertz/blob/main/examples/camera_heart_rate.py)。
+
+#### TinyHR 资源
+
+- [完整演示视频](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
+- [TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
+- [模型架构图](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
 
 ### AdaChrom：无监督色度 rPPG
 
@@ -145,6 +252,15 @@ $$
 HR = 60 f_{peak}
 $$
 
+#### 实验结果
+
+AdaChrom-v4 在 VIPL-HR 数据集第五折上的结果如下：
+
+| 标签 | MAE ↓ | RMSE ↓ | Pearson ↑ |
+|---|---:|---:|---:|
+| gt | **8.60** | **13.00** | **0.42** |
+| wave | **6.63** | **9.84** | **0.47** |
+
 ## 安装
 
 本项目已包含在 SeetaPsych 默认配置中，可通过以下命令下载模块：
@@ -202,8 +318,8 @@ seetapsych-manager download
 
 ## 项目资源
 
-- [TinyHR 英文文档](seetapsych_hertz/tinyhr/README.md)
-- [TinyHR 中文文档](seetapsych_hertz/tinyhr/README_CN.md)
+- [TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
+- [TinyHR 模型架构图](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
 - [HERTZ 项目主页](https://seetapsych.github.io/seetapsych-hertz/zh/)
 - [交互式项目主页源码](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face 模型发布与交互式演示正在规划中。
