@@ -8,7 +8,9 @@
 
 HERTZ brings complementary heart-rate estimators into one extensible open-source collection.
 TinyHR learns pulse waveforms from facial video, while AdaChrom recovers pulse signals through
-an interpretable, training-free chrominance pipeline.
+an interpretable, training-free chrominance pipeline. The collection follows a modular
+organization that supports the incorporation, independent documentation, and comparison of
+additional rPPG estimators.
 
 [English](README.md) | [简体中文](README_CN.md)
 
@@ -35,9 +37,6 @@ open-source remote photoplethysmography (rPPG) estimators: **TinyHR**, a lightwe
 convolutional model that predicts a pulse waveform from facial video, and **AdaChrom**, an
 unsupervised signal-processing method based on adaptive skin-region selection, chrominance
 projection, and frequency analysis.
-
-Designed as a modular research collection, HERTZ can incorporate additional rPPG estimators
-as independently documented and comparable method modules.
 
 The exported ONNX model contains **82,177 parameter elements** and occupies approximately
 **381 KiB**. The training subsets reported across four datasets sum to **1,288 subjects**
