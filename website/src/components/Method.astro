@@ -31,15 +31,11 @@ const modules = [
             <p class="algorithm-kicker">LEARNING-BASED · LIGHTWEIGHT</p>
             <h3 id="tinyhr-title">TinyHR</h3>
             <p>Remote photoplethysmography (rPPG) estimates pulse-related signals from subtle changes in light reflected by facial skin. TinyHR processes a clip of {site.inputFrames} RGB facial frames at {site.inputSize} × {site.inputSize} pixels. Its lightweight convolutional pipeline emphasizes differences between neighboring frames, builds compact spatial features, and combines temporal information at multiple scales. The network predicts one rPPG waveform sample per video frame. Heart rate is then calculated from the predicted waveform using filtering and spectral analysis.</p>
-            <p class="source-note"><a href={`${site.reportUrl}#page=1`} target="_blank" rel="noopener noreferrer" aria-label="Open the method description in the technical report in a new tab">Method description: TinyHR technical report, pages 1-6. <span aria-hidden="true">↗</span></a></p>
           </div>
         </header>
 
         <MethodFigure />
 
-        <div class="module-intro">
-          <p class="source-note"><a href={`${site.reportUrl}#page=1`} target="_blank" rel="noopener noreferrer" aria-label="Open the architecture details in the technical report in a new tab">Architecture details: technical report, pages 1-3. <span aria-hidden="true">↗</span></a></p>
-        </div>
         <ol class="module-grid">
           {modules.map((module) => (
             <li>
@@ -58,7 +54,6 @@ const modules = [
           <div>
             <p>During inference, a second-order Butterworth band-pass filter retains frequencies from 0.75 to 2.5 Hz. Welch's method estimates the power spectral density of the filtered waveform. The dominant frequency is converted to beats per minute.</p>
             <p class="formula"><code>Heart rate (BPM) = 60 × dominant frequency (Hz)</code></p>
-            <p class="source-note"><a href={`${site.reportUrl}#page=6`} target="_blank" rel="noopener noreferrer" aria-label="Open the inference procedure in the technical report in a new tab">Inference procedure: technical report, page 6. <span aria-hidden="true">↗</span></a></p>
           </div>
         </div>
 
@@ -66,7 +61,6 @@ const modules = [
           <summary>Training objectives</summary>
           <p>Training combines a negative Pearson correlation objective for waveform agreement, a frequency-domain cross-entropy objective, and a KL-divergence objective for heart-rate distributions. The reported weights are 0.2, 1.0, and 1.0, respectively.</p>
           <p class="formula"><code>L = 0.2 L<sub>time</sub> + L<sub>CE</sub> + L<sub>KL</sub></code></p>
-          <p class="source-note"><a href={`${site.reportUrl}#page=3`} target="_blank" rel="noopener noreferrer" aria-label="Open the training objectives in the technical report in a new tab">Training objectives: technical report, pages 3-6. <span aria-hidden="true">↗</span></a></p>
         </details>
       </article>
 

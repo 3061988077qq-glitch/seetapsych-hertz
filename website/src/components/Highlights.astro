@@ -1,6 +1,4 @@
 ---
-import { site } from '../data/site';
-
 interface Props {
   lang?: 'en' | 'zh';
 }
@@ -87,9 +85,6 @@ const datasets = [
           </tbody>
         </table>
       </div>
-      <p class="source-note">{zh
-        ? <>独立测试：VIPL-HR V1，22 名受试者、485 段视频；MAE 3.88 BPM。数据来自<a href={`${site.reportUrl}#page=6`} target="_blank" rel="noopener noreferrer">技术报告第 6-7 页 <span aria-hidden="true">↗</span></a>。</>
-        : <>Held-out evaluation: VIPL-HR V1, 22 subjects and 485 videos; MAE 3.88 BPM. Data from the <a href={`${site.reportUrl}#page=6`} target="_blank" rel="noopener noreferrer">technical report, pages 6-7 <span aria-hidden="true">↗</span></a>.</>}</p>
     </div>
   </div>
 </section>
