@@ -939,6 +939,7 @@ a.resource-row:hover {
 
 .footer-affiliations {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.1rem;
   align-items: center;
   width: fit-content;
