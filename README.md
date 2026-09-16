@@ -2,7 +2,7 @@
 
 # HERTZ
 
-<img src="website/public/media/tinyhr-logo.png" width="460" alt="HERTZ logo">
+<img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-logo.png" width="460" alt="HERTZ logo">
 
 ### Open-source heart-rate estimation from facial video
 
@@ -10,18 +10,18 @@ HERTZ brings complementary heart-rate estimators into one extensible open-source
 TinyHR learns pulse waveforms from facial video, while AdaChrom recovers pulse signals through
 an interpretable, training-free chrominance pipeline.
 
-[English](README.md) | [简体中文](README_CN.md)
+[English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
 [Introduction](#introduction) · [Estimator collection](#hertz-estimator-collection) · [Installation](#installation) · [Demo](#demo) · [Datasets](#training-data) · [Benchmark](#model-size-and-inference-time) · [Resources](#resources)
 
-[![TinyHR demo showing facial video, predicted pulse waveform, and heart-rate estimates](website/public/media/tinyhr-demo.gif)](website/public/media/demo-full.mp4)
+[![TinyHR demo showing facial video, predicted pulse waveform, and heart-rate estimates](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-demo.gif)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 
 *Watch TinyHR estimate a pulse waveform and heart rate from facial video. Click for the full demo.*
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-2563D8?logo=python&logoColor=white)](pyproject.toml)
-[![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-CPU%20%7C%20GPU-091D31?logo=onnx&logoColor=white)](seetapsych_hertz/modules/tiny-hr.yml)
-[![TinyHR](https://img.shields.io/badge/TinyHR-82%2C177_params-FB5F14)](seetapsych_hertz/modules/tiny-hr.yml)
-[![License](https://img.shields.io/badge/License-BSD--3--Clause-75E5C9)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-2563D8?logo=python&logoColor=white)](https://github.com/seetapsych/seetapsych-hertz/blob/main/pyproject.toml)
+[![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-CPU%20%7C%20GPU-091D31?logo=onnx&logoColor=white)](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml)
+[![TinyHR](https://img.shields.io/badge/TinyHR-82%2C177_params-FB5F14)](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml)
+[![License](https://img.shields.io/badge/License-BSD--3--Clause-75E5C9)](https://github.com/seetapsych/seetapsych-hertz/blob/main/LICENSE)
 
 </div>
 
@@ -87,7 +87,7 @@ reported training-subset counts.
 | Learning-rate scheduler | OneCycleLR |
 | Input clip | 160 RGB face crops, each resized to 128 × 128 pixels |
 
-Source: [TinyHR technical report](website/public/downloads/tinyhr-technical-report.pdf), page 1 (input) and pages 6-7 (training data and configuration).
+Source: [TinyHR technical report](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf), page 1 (input) and pages 6-7 (training data and configuration).
 
 ## Model Size and Inference Time
 
@@ -115,7 +115,7 @@ human-computer interaction, affective computing, and contactless monitoring rese
 
 ### TinyHR: lightweight learning-based rPPG
 
-[![TinyHR architecture and inference flow](website/public/media/tinyhr-flowchart.png)](website/public/downloads/tinyhr-flowchart.pdf)
+[![TinyHR architecture and inference flow](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-flowchart.png)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
 
 *Click the diagram to open the architecture PDF. Some diagram labels differ from the report's text: TinyHR uses convolutional MTF processing and non-overlapping spatial patches, as described below.*
 
@@ -158,7 +158,7 @@ a sliding temporal window, and the BVP signal is recovered from these temporal c
 the post-processing stage, heart rate is estimated from the recovered BVP signal through
 frequency-domain analysis and peak selection.
 
-![AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing](website/public/media/adachrom-pipeline.png)
+![AdaChrom pipeline: preprocessing, BVP extraction, and heart-rate post-processing](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/adachrom-pipeline.png)
 
 *Figure 3: Overview of the AdaChrom pipeline. The figure and the complete method text below are reproduced from Section 3.2.3.1 of the SeetaPsych v1.0 technical report.*
 
@@ -326,8 +326,8 @@ For complete end-to-end examples with visualization, see:
 
 | Module | Description | Input modes |
 |---|---|---|
-| [AdaChrom](seetapsych_hertz/modules/ada-chrom.yml) | Chrominance-based rPPG on adaptive skin ROIs, without a learned pulse estimator | Video stream · video file |
-| [TinyHR](seetapsych_hertz/modules/tiny-hr.yml) | Convolutional rPPG waveform estimation with Welch PSD-based heart-rate post-processing | Video stream · video file |
+| [AdaChrom](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/ada-chrom.yml) | Chrominance-based rPPG on adaptive skin ROIs, without a learned pulse estimator | Video stream · video file |
+| [TinyHR](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml) | Convolutional rPPG waveform estimation with Welch PSD-based heart-rate post-processing | Video stream · video file |
 
 ### TinyHR Parameters
 
@@ -374,20 +374,20 @@ The per-region results requested via `roi_regions` are returned inside `roi_hr_b
 
 ## Resources
 
-- [Full recorded demo](website/public/media/demo-full.mp4)
-- [TinyHR technical report](website/public/downloads/tinyhr-technical-report.pdf)
-- [Architecture diagram](website/public/downloads/tinyhr-flowchart.pdf)
-- [Interactive project page source](website/)
+- [Full recorded demo](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
+- [TinyHR technical report](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
+- [Architecture diagram](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
+- [Interactive project page source](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face model distribution and interactive demos are planned.
 
 ## License
 
-This project is released under the [BSD 3-Clause License](LICENSE).
+This project is released under the [BSD 3-Clause License](https://github.com/seetapsych/seetapsych-hertz/blob/main/LICENSE).
 
 ## Affiliations
 
 <p align="center">
-  <a href="https://scholar.google.com/citations?user=HRBTJYYAAAAJ" title="Southeast University"><img src="website/public/media/affiliations/southeast-university.png" alt="Southeast University" height="104" /></a>
+  <a href="https://scholar.google.com/citations?user=HRBTJYYAAAAJ" title="Southeast University"><img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/affiliations/southeast-university.png" alt="Southeast University" height="104" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://vipl.ict.ac.cn/en/index.html" title="Institute of Computing Technology, Chinese Academy of Sciences"><img src="website/public/media/affiliations/ict-cas.png" alt="Institute of Computing Technology, Chinese Academy of Sciences" height="72" /></a>
+  <a href="https://vipl.ict.ac.cn/en/index.html" title="Institute of Computing Technology, Chinese Academy of Sciences"><img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/affiliations/ict-cas.png" alt="Institute of Computing Technology, Chinese Academy of Sciences" height="72" /></a>
 </p>

@@ -2,25 +2,25 @@
 
 # HERTZ
 
-<img src="website/public/media/tinyhr-logo.png" width="460" alt="HERTZ 标志">
+<img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-logo.png" width="460" alt="HERTZ 标志">
 
 ### 面向人脸视频的开源心率估计算法集合
 
 HERTZ 将多种互补的心率估计方法组织为可扩展的开源算法集合。TinyHR 从人脸视频学习脉搏波形，
 AdaChrom 则通过无需训练的色度信号处理管线恢复脉搏信号。
 
-[English](README.md) | [简体中文](README_CN.md)
+[English](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md) | [简体中文](https://github.com/seetapsych/seetapsych-hertz/blob/main/README_CN.md)
 
 [项目简介](#项目简介) · [算法集合](#hertz-心率估计算法集合) · [安装](#安装) · [演示](#演示) · [数据集](#训练数据) · [性能测试](#模型规模与推理时间) · [资源](#项目资源)
 
-[![TinyHR 演示：人脸视频、预测脉搏波形和心率估计](website/public/media/tinyhr-demo.gif)](website/public/media/demo-full.mp4)
+[![TinyHR 演示：人脸视频、预测脉搏波形和心率估计](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-demo.gif)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
 
 *观看 TinyHR 从人脸视频估计脉搏波形与心率；点击可观看完整演示。*
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-2563D8?logo=python&logoColor=white)](pyproject.toml)
-[![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-CPU%20%7C%20GPU-091D31?logo=onnx&logoColor=white)](seetapsych_hertz/modules/tiny-hr.yml)
-[![TinyHR](https://img.shields.io/badge/TinyHR-82%2C177_params-FB5F14)](seetapsych_hertz/modules/tiny-hr.yml)
-[![License](https://img.shields.io/badge/License-BSD--3--Clause-75E5C9)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-2563D8?logo=python&logoColor=white)](https://github.com/seetapsych/seetapsych-hertz/blob/main/pyproject.toml)
+[![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-CPU%20%7C%20GPU-091D31?logo=onnx&logoColor=white)](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml)
+[![TinyHR](https://img.shields.io/badge/TinyHR-82%2C177_params-FB5F14)](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml)
+[![License](https://img.shields.io/badge/License-BSD--3--Clause-75E5C9)](https://github.com/seetapsych/seetapsych-hertz/blob/main/LICENSE)
 
 </div>
 
@@ -81,7 +81,7 @@ VIPL-HR V1 测试集包含 **22 名受试者和 485 段视频**，报告说明�
 | 学习率调度器 | OneCycleLR |
 | 输入视频片段 | 160 帧 RGB 人脸裁剪图像，每帧缩放至 128 × 128 像素 |
 
-来源：[TinyHR 技术报告](website/public/downloads/tinyhr-technical-report.pdf)，第 1 页（模型输入）、第 6-7 页（训练数据与配置）。
+来源：[TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)，第 1 页（模型输入）、第 6-7 页（训练数据与配置）。
 
 ## 模型规模与推理时间
 
@@ -106,7 +106,7 @@ VIPL-HR V1 测试集包含 **22 名受试者和 485 段视频**，报告说明�
 
 ### TinyHR：轻量学习型 rPPG
 
-[![TinyHR 架构和推理流程](website/public/media/tinyhr-flowchart.png)](website/public/downloads/tinyhr-flowchart.pdf)
+[![TinyHR 架构和推理流程](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/tinyhr-flowchart.png)](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
 
 *点击图片可打开架构 PDF。图中部分标签与报告正文不一致：TinyHR 采用卷积式 MTF 时序处理与非重叠空间分块，具体说明见下表。*
 
@@ -140,11 +140,11 @@ AdaChrom 是一种无需标注训练数据的无监督 rPPG 心率估计方法�
 定位可靠的皮肤区域，提取随脉搏变化的细微颜色信号，通过 CHROM 色度投影恢复血容量
 脉搏波形，最后利用 FFT 主频分析输出心率，为 TinyHR 之外提供一条轻量、可解释的开源方案。
 
-![AdaChrom 流程：预处理、BVP 提取和心率后处理](website/public/media/adachrom-pipeline.png)
+![AdaChrom 流程：预处理、BVP 提取和心率后处理](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/adachrom-pipeline.png)
 
 *AdaChrom 流程图，摘自 SeetaPsych v1.0 技术报告第 10 页。*
 
-> 技术报告第 3.2.3.1 节的完整英文原文、四种 ROI 策略、CHROM 公式与 FFT 后处理步骤已收录于 [English README](README.md#adachrom-unsupervised-chrominance-based-rppg)。
+> 技术报告第 3.2.3.1 节的完整英文原文、四种 ROI 策略、CHROM 公式与 FFT 后处理步骤已收录于 [English README](https://github.com/seetapsych/seetapsych-hertz/blob/main/README.md#adachrom-unsupervised-chrominance-based-rppg)。
 
 ## 实验结果
 
@@ -195,8 +195,8 @@ pipeline.add_attributes("face/heart_rate")
 
 | 模块 | 说明 | 输入方式 |
 |---|---|---|
-| [AdaChrom](seetapsych_hertz/modules/ada-chrom.yml) | 基于自适应皮肤 ROI 的色度 rPPG 方法，脉搏估计不依赖学习模型 | 视频流 · 视频文件 |
-| [TinyHR](seetapsych_hertz/modules/tiny-hr.yml) | 卷积式 rPPG 波形估计，结合基于 Welch PSD 的心率后处理 | 视频流 · 视频文件 |
+| [AdaChrom](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/ada-chrom.yml) | 基于自适应皮肤 ROI 的色度 rPPG 方法，脉搏估计不依赖学习模型 | 视频流 · 视频文件 |
+| [TinyHR](https://github.com/seetapsych/seetapsych-hertz/blob/main/seetapsych_hertz/modules/tiny-hr.yml) | 卷积式 rPPG 波形估计，结合基于 Welch PSD 的心率后处理 | 视频流 · 视频文件 |
 
 ### TinyHR 参数
 
@@ -244,20 +244,20 @@ pipeline.add_attributes("face/heart_rate")
 
 ## 项目资源
 
-- [完整演示视频](website/public/media/demo-full.mp4)
-- [TinyHR 技术报告](website/public/downloads/tinyhr-technical-report.pdf)
-- [模型架构图](website/public/downloads/tinyhr-flowchart.pdf)
-- [交互式项目主页源码](website/)
+- [完整演示视频](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/demo-full.mp4)
+- [TinyHR 技术报告](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-technical-report.pdf)
+- [模型架构图](https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/downloads/tinyhr-flowchart.pdf)
+- [交互式项目主页源码](https://github.com/seetapsych/seetapsych-hertz/tree/main/website)
 - Hugging Face 模型发布与交互式演示正在规划中。
 
 ## 开源许可
 
-本项目使用 [BSD 3-Clause License](LICENSE) 发布。
+本项目使用 [BSD 3-Clause License](https://github.com/seetapsych/seetapsych-hertz/blob/main/LICENSE) 发布。
 
 ## 项目机构
 
 <p align="center">
-  <a href="https://mysee1989.github.io/" title="东南大学"><img src="website/public/media/affiliations/southeast-university.png" alt="东南大学" height="104" /></a>
+  <a href="https://mysee1989.github.io/" title="东南大学"><img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/affiliations/southeast-university.png" alt="东南大学" height="104" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://vipl.ict.ac.cn/" title="中国科学院计算技术研究院"><img src="website/public/media/affiliations/ict-cas.png" alt="中国科学院计算技术研究院" height="72" /></a>
+  <a href="https://vipl.ict.ac.cn/" title="中国科学院计算技术研究院"><img src="https://raw.githubusercontent.com/seetapsych/seetapsych-hertz/main/website/public/media/affiliations/ict-cas.png" alt="中国科学院计算技术研究院" height="72" /></a>
 </p>
