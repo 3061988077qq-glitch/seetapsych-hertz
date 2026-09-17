@@ -1264,7 +1264,7 @@ a.resource-row:hover {
 }
 
 .adachrom-pipeline-frame {
-  aspect-ratio: 1170 / 410;
+  aspect-ratio: 1170 / 396;
   overflow: hidden;
   background: #fff;
   border: 1px solid rgb(15 23 42 / 12%);
